@@ -1,0 +1,3439 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🕯️ ПОСТАВЬ СВЕЧУ ДАРИО АМОДЕЮ — Официальный* ритуал сброса лимитов Claude</title>
+  <meta name="description" content="Закончились лимиты Claude? Работа встала? Поставь цифровую свечу Дарио Амодею. Возможно, сегодня ночью он лично сбросит тебе лимиты.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Press+Start+2P&family=Unbounded:wght@700;800;900&family=Rubik:ital,wght@0,400;0,500;0,700;0,900;1,500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root {
+      --bg-paper: #FAF7F0;
+      --bg-card: #FFFFFF;
+      --os-gray: #E6E2D8;
+      --os-gray-dark: #B8B3A6;
+      --yellow: #FFD600;
+      --yellow-soft: #FFF5B8;
+      --red: #FF3300;
+      --red-soft: #FFE5DF;
+      --blue: #0047FF;
+      --win-blue-1: #0038A8;
+      --win-blue-2: #2B7FFF;
+      --green: #00E050;
+      --green-soft: #DFFCE9;
+      --pink: #FF80CC;
+      --cyan: #66F0FF;
+      --black: #111111;
+      --text-muted: #55524A;
+
+      --border-sm: 2px solid var(--black);
+      --border-md: 2.5px solid var(--black);
+      --border-lg: 3px solid var(--black);
+
+      --shadow-xs: 2px 2px 0px var(--black);
+      --shadow-sm: 4px 4px 0px var(--black);
+      --shadow-md: 6px 6px 0px var(--black);
+      --shadow-lg: 8px 8px 0px var(--black);
+
+      --font-display: 'Unbounded', 'Rubik', sans-serif;
+      --font-body: 'Rubik', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-pixel: 'Press Start 2P', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-paper);
+      background-image:
+        linear-gradient(to right, rgba(17, 17, 17, 0.055) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(17, 17, 17, 0.055) 1px, transparent 1px);
+      background-size: 36px 36px;
+      color: var(--black);
+      line-height: 1.5;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    ::selection {
+      background: var(--yellow);
+      color: var(--black);
+    }
+
+    a, button, input, textarea {
+      font-family: inherit;
+      color: inherit;
+    }
+
+    :focus-visible {
+      outline: 3px dashed var(--red);
+      outline-offset: 3px;
+    }
+
+    /* ВЕРХНЯЯ БЕГУЩАЯ СТРОКА */
+    .top-marquee-wrap {
+      background: var(--black);
+      color: var(--yellow);
+      border-bottom: var(--border-md);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 7px 0;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .marquee-track {
+      display: inline-flex;
+      white-space: nowrap;
+      animation: marqueeScroll 38s linear infinite;
+    }
+
+    .top-marquee-wrap:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+    .marquee-item {
+      padding: 0 28px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .marquee-sep {
+      color: var(--red);
+    }
+
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ЕДИНАЯ ПАНЕЛЬ НАВИГАЦИИ В СТИЛЕ OS-TOOLBAR */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 80;
+      background: rgba(250, 247, 240, 0.92);
+      backdrop-filter: blur(6px);
+      border-bottom: var(--border-md);
+      padding: 10px 16px;
+    }
+
+    .header-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand-cluster {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 0.9rem;
+      text-decoration: none;
+      background: var(--yellow);
+      border: var(--border-sm);
+      box-shadow: var(--shadow-xs);
+      padding: 5px 11px;
+      letter-spacing: -0.02em;
+    }
+
+    .visitor-counter-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--black);
+      color: var(--green);
+      padding: 5px 10px;
+      border: var(--border-sm);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .visitor-digits {
+      font-family: var(--font-pixel);
+      font-size: 0.65rem;
+      letter-spacing: 1.5px;
+      color: var(--green);
+    }
+
+    .nav-cluster {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .retro-nav-list {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .retro-nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--bg-card);
+      border: var(--border-sm);
+      box-shadow: var(--shadow-xs);
+      padding: 5px 11px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.76rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.12s ease, background-color 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    .retro-nav-link:hover {
+      background: var(--yellow);
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0px var(--black);
+    }
+
+    .retro-nav-link:active {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0px var(--black);
+    }
+
+    .retro-nav-link.nav-hot {
+      background: var(--yellow);
+      font-weight: 800;
+    }
+
+    .btn-dont-press {
+      background: var(--red-soft);
+      color: var(--red);
+      border: var(--border-sm);
+      box-shadow: var(--shadow-xs);
+      padding: 5px 10px;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: all 0.12s ease;
+    }
+
+    .btn-dont-press:hover {
+      background: var(--red);
+      color: var(--bg-card);
+    }
+
+    /* ОСНОВНОЙ КОНТЕЙНЕР С ВОЗДУХОМ */
+    .main-container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 44px 20px 100px;
+    }
+
+    /* ПЕРВЫЙ ЭКРАН (HERO) */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .hero-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--yellow);
+      border: var(--border-sm);
+      box-shadow: var(--shadow-xs);
+      padding: 5px 12px;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 0.76rem;
+      transform: rotate(-1deg);
+    }
+
+    .sys-pill-429 {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--red-soft);
+      color: var(--red);
+      border: var(--border-sm);
+      padding: 4px 9px;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 0.72rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(2.1rem, 4.4vw, 3.6rem);
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .hero-title .highlight-red {
+      display: inline-block;
+      background: var(--red);
+      color: #FFFFFF;
+      padding: 2px 12px 4px;
+      border: var(--border-md);
+      box-shadow: var(--shadow-sm);
+      transform: rotate(-1deg);
+      margin-top: 6px;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(1.2rem, 2.2vw, 1.65rem);
+      margin-bottom: 20px;
+      background: var(--bg-card);
+      border: var(--border-sm);
+      box-shadow: var(--shadow-xs);
+      padding: 6px 14px;
+    }
+
+    .hero-lead-box {
+      background: var(--bg-card);
+      border: var(--border-md);
+      box-shadow: var(--shadow-sm);
+      padding: 18px 20px;
+      margin-bottom: 26px;
+      max-width: 540px;
+      position: relative;
+    }
+
+    .hero-haiku {
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 0.92rem;
+      color: var(--blue);
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1.5px dashed #CCC;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: #222;
+      line-height: 1.5;
+    }
+
+    .cta-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .btn-main-cta {
+      background: var(--red);
+      color: #FFFFFF;
+      border: var(--border-lg);
+      box-shadow: var(--shadow-md);
+      padding: 18px 30px;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      text-transform: uppercase;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      transition: transform 0.12s ease, background-color 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    .btn-main-cta:hover {
+      background: var(--yellow);
+      color: var(--black);
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-main-cta:active {
+      transform: translate(3px, 3px);
+      box-shadow: var(--shadow-xs);
+    }
+
+    .cta-micro {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .urgent-bulletin {
+      margin-top: 22px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      background: var(--yellow-soft);
+      border: var(--border-sm);
+      padding: 6px 12px;
+    }
+
+    .blink-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--red);
+      display: inline-block;
+      animation: pulseBlink 1s steps(2, start) infinite;
+    }
+
+    @keyframes pulseBlink {
+      to { opacity: 0.15; }
+    }
+
+    /* ОКНО АЛТАРЯ СО СВЕЧОЙ (В ДУХЕ PIKZELS / RETRO OS) */
+    .xp-window {
+      background: var(--os-gray);
+      border: var(--border-lg);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+
+    .window-floating-tag {
+      position: absolute;
+      top: -14px;
+      right: 16px;
+      background: var(--green);
+      color: var(--black);
+      border: var(--border-sm);
+      box-shadow: var(--shadow-xs);
+      padding: 3px 10px;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 0.7rem;
+      transform: rotate(3deg);
+      z-index: 6;
+    }
+
+    .xp-titlebar {
+      background: linear-gradient(90deg, var(--win-blue-1) 0%, var(--win-blue-2) 100%);
+      color: #FFFFFF;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: var(--border-md);
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.78rem;
+      user-select: none;
+    }
+
+    .xp-titlebar-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .xp-controls {
+      display: flex;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+
+    .xp-btn {
+      width: 20px;
+      height: 20px;
+      background: var(--os-gray);
+      color: var(--black);
+      border: 1.5px solid var(--black);
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 0.7rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .xp-btn:hover {
+      background: var(--yellow);
+    }
+
+    .xp-btn-close {
+      background: var(--red);
+      color: #FFFFFF;
+    }
+
+    .xp-body {
+      padding: 14px;
+      background: var(--os-gray);
+    }
+
+    /* СЦЕНА СВЕЧИ */
+    .candle-stage {
+      position: relative;
+      height: 270px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 12px;
+      background-color: #12131A;
+      background-image:
+        radial-gradient(circle at 50% 36%, rgba(255, 204, 0, 0.28) 0%, rgba(255, 85, 0, 0.1) 42%, transparent 70%),
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 24px 24px, 24px 24px;
+      border: var(--border-md);
+      overflow: hidden;
+    }
+
+    .candle-note-sticker {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--black);
+      border: 1.5px solid var(--black);
+      padding: 3px 8px;
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 700;
+      z-index: 5;
+    }
+
+    .floating-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 4;
+    }
+
+    .float-particle {
+      position: absolute;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 0.74rem;
+      color: var(--yellow);
+      text-shadow: 1.5px 1.5px 0 #000;
+      animation: floatUpParticle 3.4s ease-out forwards;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    @keyframes floatUpParticle {
+      0% {
+        opacity: 0;
+        transform: translateY(8px) scale(0.85);
+      }
+      15% {
+        opacity: 1;
+        transform: translateY(0px) scale(1);
+      }
+      85% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-120px) scale(1.05);
+      }
+    }
+
+    /* РИСОВАННАЯ СВЕЧА */
+    .candle-wrapper {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 3;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .flame-halo {
+      position: absolute;
+      top: -38px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,220,0,0.5) 0%, rgba(255,90,0,0.18) 52%, transparent 72%);
+      animation: haloPulse 1.8s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes haloPulse {
+      0% { transform: scale(0.92); opacity: 0.78; }
+      100% { transform: scale(1.1); opacity: 1; }
+    }
+
+    .flame-container {
+      position: relative;
+      width: 50px;
+      height: 76px;
+      margin-bottom: -6px;
+      transform-origin: 50% 95%;
+      animation: flameSway 2.3s ease-in-out infinite;
+      transition: transform 0.25s ease;
+    }
+
+    .candle-stage.boosted .flame-container {
+      scale: 1.32;
+    }
+
+    @keyframes flameSway {
+      0%, 100% { transform: rotate(-2deg) scaleY(1); }
+      25% { transform: rotate(2.5deg) scaleY(1.04); }
+      50% { transform: rotate(-1.5deg) scaleY(0.96); }
+      75% { transform: rotate(2.5deg) scaleY(1.03); }
+    }
+
+    .flame-outer {
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 38px;
+      height: 64px;
+      background: linear-gradient(180deg, #FF3300 0%, #FF8800 45%, #FFE600 92%);
+      border-radius: 50% 50% 35% 35% / 65% 65% 35% 35%;
+      border: 2.5px solid #000;
+      box-shadow: 0 0 18px rgba(255, 136, 0, 0.8);
+    }
+
+    .flame-mid {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 22px;
+      height: 42px;
+      background: linear-gradient(180deg, #FF9900 0%, #FFF000 88%);
+      border-radius: 50% 50% 35% 35% / 65% 65% 35% 35%;
+      animation: innerFlicker 0.9s ease-in-out infinite alternate;
+    }
+
+    .flame-core {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 22px;
+      background: #FFFFFF;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #FFFFFF;
+    }
+
+    @keyframes innerFlicker {
+      0% { transform: translateX(-50%) scale(0.94); }
+      100% { transform: translateX(-50%) scale(1.06); }
+    }
+
+    .wick-svg {
+      transform-box: fill-box;
+      transform-origin: 50% 100%;
+    }
+
+    .candle-body-svg {
+      display: block;
+      filter: drop-shadow(4px 4px 0px #000000);
+    }
+
+    /* МИКРОАНИМАЦИИ: заметные, но не меняют общий стиль страницы */
+    .candle-stage.wind-blow .flame-container {
+      animation: flameBlow 0.62s cubic-bezier(.2,.75,.2,1) !important;
+    }
+
+    .candle-stage.wind-blow .flame-halo {
+      animation: haloBlow 0.62s ease-out !important;
+    }
+
+    @keyframes flameBlow {
+      0%   { transform: rotate(-2deg) scaleY(1); }
+      22%  { transform: translateX(10px) rotate(28deg) scale(.92,.68); }
+      46%  { transform: translateX(20px) rotate(42deg) scale(.78,.42); }
+      72%  { transform: translateX(5px) rotate(10deg) scale(.95,.84); }
+      100% { transform: rotate(-2deg) scaleY(1); }
+    }
+
+    @keyframes haloBlow {
+      0%   { transform: scale(1); opacity: .9; }
+      45%  { transform: translateX(16px) scale(.62); opacity: .28; }
+      100% { transform: scale(1); opacity: .9; }
+    }
+
+    .ui-click-burst {
+      position: fixed;
+      z-index: 9999;
+      pointer-events: none;
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      font-weight: 900;
+      color: var(--black);
+      background: var(--yellow);
+      border: 1.5px solid var(--black);
+      box-shadow: 2px 2px 0 var(--black);
+      padding: 2px 6px;
+      transform: translate(-50%, -50%);
+      animation: clickBurst .72s cubic-bezier(.16,.8,.25,1) forwards;
+      white-space: nowrap;
+    }
+
+    @keyframes clickBurst {
+      0%   { opacity: 0; transform: translate(-50%, -35%) scale(.65) rotate(-5deg); }
+      18%  { opacity: 1; transform: translate(-50%, -65%) scale(1.08) rotate(3deg); }
+      100% { opacity: 0; transform: translate(-50%, -165%) scale(.92) rotate(-2deg); }
+    }
+
+    .xp-window.window-shake { animation: windowShake .38s ease-in-out; }
+    .xp-window.window-minimize-fake { animation: windowMinimizeFake .48s cubic-bezier(.2,.8,.2,1); }
+    .xp-window.window-max-fake { animation: windowMaxFake .48s cubic-bezier(.2,.8,.2,1); }
+
+    @keyframes windowShake {
+      0%,100% { transform: translateX(0); }
+      20% { transform: translateX(-7px) rotate(-.5deg); }
+      40% { transform: translateX(7px) rotate(.5deg); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(3px); }
+    }
+
+    @keyframes windowMinimizeFake {
+      0%,100% { transform: scale(1); opacity: 1; }
+      45% { transform: scale(.94,.18) translateY(34px); opacity: .72; }
+    }
+
+    @keyframes windowMaxFake {
+      0%,100% { transform: scale(1); }
+      45% { transform: scale(1.035) rotate(.35deg); }
+    }
+
+    .counter-digits-wrap.counter-glitch { animation: counterGlitch .55s steps(2,end); }
+    @keyframes counterGlitch {
+      0%,100% { transform: translate(0); filter: none; }
+      20% { transform: translate(-3px,1px); filter: hue-rotate(80deg); }
+      40% { transform: translate(3px,-1px); filter: hue-rotate(-80deg); }
+      60% { transform: translate(-2px,0); }
+      80% { transform: translate(2px,1px); }
+    }
+
+    .ad-banner-fake.ad-wobble { animation: adWobble .46s cubic-bezier(.2,.8,.2,1); }
+    @keyframes adWobble {
+      0%,100% { transform: rotate(0); }
+      25% { transform: rotate(-2.2deg) scale(1.02); }
+      55% { transform: rotate(2deg) scale(1.015); }
+      78% { transform: rotate(-.8deg); }
+    }
+
+    .prayers-grid.grid-swap { animation: gridSwap .3s ease-out; }
+    @keyframes gridSwap {
+      0% { opacity: .45; transform: translateY(5px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .prayer-card.amen-flash { animation: amenFlash .46s cubic-bezier(.2,.8,.2,1); }
+    @keyframes amenFlash {
+      0%,100% { transform: translate(0); }
+      45% { transform: translate(-2px,-3px) rotate(-.7deg); box-shadow: 8px 8px 0 var(--black); }
+    }
+
+    .btn-sacrifice.sacrifice-pop { animation: sacrificePop .42s cubic-bezier(.16,.8,.25,1); }
+    @keyframes sacrificePop {
+      0%,100% { transform: translate(0) scale(1); }
+      48% { transform: translate(-2px,-2px) scale(1.025) rotate(-.5deg); }
+    }
+
+    .altar-actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .btn-altar-mini {
+      background: var(--bg-card);
+      color: var(--black);
+      border: var(--border-sm);
+      box-shadow: var(--shadow-xs);
+      padding: 6px 8px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.7rem;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.1s ease, transform 0.1s ease;
+    }
+
+    .btn-altar-mini:hover {
+      background: var(--yellow);
+    }
+
+    .btn-altar-mini:active {
+      transform: translate(1px, 1px);
+      box-shadow: none;
+    }
+
+    /* ГЛАВНЫЙ СЧЁТЧИК СВЕЧЕЙ ВНУТРИ ОКНА */
+    .main-counter-panel {
+      background: var(--bg-card);
+      border-top: var(--border-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 6px;
+    }
+
+    .counter-header-meta {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: var(--red);
+      letter-spacing: 0.04em;
+    }
+
+    .counter-digits-wrap {
+      background: #0D0E12;
+      color: var(--green);
+      border: var(--border-md);
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.6), var(--shadow-xs);
+      padding: 10px 18px;
+      display: inline-block;
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .counter-digits-wrap.bump {
+      transform: scale(1.08) rotate(-1.5deg);
+      color: var(--yellow);
+    }
+
+    .counter-big-number {
+      font-family: var(--font-pixel);
+      font-size: clamp(1.15rem, 2.3vw, 1.65rem);
+      letter-spacing: 3px;
+      text-shadow: 0 0 8px rgba(0, 224, 80, 0.55);
+    }
+
+    .counter-label-main {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .counter-subnote {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: var(--text-muted);
+    }
+
+    /* ТЕЛЕМЕТРИЯ: СТАТУС ДАРИО + ЧАСЫ СУДНОГО СБРОСА + ИНФО-БАННЕР */
+    .widgets-strip {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr 0.9fr;
+      gap: 20px;
+      margin-top: 48px;
+    }
+
+    .retro-widget {
+      background: var(--bg-card);
+      border: var(--border-md);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .widget-header {
+      background: var(--os-gray);
+      color: var(--black);
+      padding: 7px 12px;
+      border-bottom: var(--border-sm);
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .widget-content {
+      padding: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+
+    .dario-status-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 0.84rem;
+      background: var(--green-soft);
+      border: var(--border-sm);
+      padding: 6px 10px;
+    }
+
+    .status-dot-online {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: var(--green);
+      border: 1.5px solid var(--black);
+      border-radius: 50%;
+      animation: statusBlink 1.4s infinite;
+    }
+
+    @keyframes statusBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+
+    .status-table {
+      display: grid;
+      gap: 5px;
+      font-size: 0.76rem;
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dashed #DDD;
+      padding-bottom: 3px;
+      gap: 8px;
+    }
+
+    .countdown-box {
+      background: #0D0E12;
+      color: var(--yellow);
+      border: var(--border-sm);
+      padding: 12px 10px;
+      text-align: center;
+      font-family: var(--font-pixel);
+      font-size: clamp(1rem, 1.9vw, 1.3rem);
+      letter-spacing: 2px;
+      text-shadow: 0 0 8px rgba(255, 214, 0, 0.5);
+    }
+
+    .ad-banner-fake {
+      background: var(--yellow-soft);
+      border: 2px dashed var(--black);
+      padding: 12px;
+      text-align: left;
+    }
+
+    .ad-banner-title {
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 0.78rem;
+      color: var(--red);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    /* СЕКЦИИ СТРАНИЦЫ */
+    .section-block {
+      margin-top: 68px;
+    }
+
+    .section-header-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: var(--border-md);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(1.3rem, 2.6vw, 1.85rem);
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-btn {
+      background: var(--bg-card);
+      border: var(--border-sm);
+      box-shadow: var(--shadow-xs);
+      padding: 6px 12px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.76rem;
+      cursor: pointer;
+      transition: all 0.12s ease;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--yellow);
+      font-weight: 800;
+    }
+
+    /* СТЕНА МОЛЬБ */
+    .prayers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 20px;
+    }
+
+    .prayer-card {
+      background: var(--bg-card);
+      border: var(--border-md);
+      box-shadow: var(--shadow-sm);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      position: relative;
+      transition: transform 0.14s ease, box-shadow 0.14s ease;
+      animation: cardPopIn 0.25s ease-out;
+    }
+
+    @keyframes cardPopIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .prayer-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .prayer-card.variant-yellow {
+      background: #FFFDF0;
+    }
+
+    .prayer-card.variant-pink {
+      background: #FFF9FC;
+    }
+
+    .prayer-card.variant-blue {
+      background: #F7FAFF;
+    }
+
+    .prayer-card.variant-mine {
+      background: var(--yellow-soft);
+      border-width: 3px;
+    }
+
+    .prayer-badge {
+      position: absolute;
+      top: -11px;
+      right: 12px;
+      background: var(--os-gray);
+      color: var(--black);
+      border: 1.5px solid var(--black);
+      box-shadow: 2px 2px 0 var(--black);
+      padding: 2px 8px;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 0.66rem;
+    }
+
+    .prayer-badge.badge-new {
+      background: var(--green);
+      color: var(--black);
+    }
+
+    .prayer-badge.badge-classic {
+      background: var(--cyan);
+      color: var(--black);
+    }
+
+    .prayer-badge.badge-pain {
+      background: var(--yellow);
+      color: var(--black);
+    }
+
+    .prayer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1.5px dashed #D5D0C5;
+    }
+
+    .prayer-author {
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 0.82rem;
+      color: var(--black);
+      background: var(--os-gray);
+      padding: 2px 8px;
+      border: 1.5px solid var(--black);
+      max-width: 85%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .prayer-message {
+      font-size: 0.98rem;
+      font-weight: 500;
+      line-height: 1.45;
+      color: var(--black);
+      word-break: break-word;
+    }
+
+    .prayer-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      padding-top: 8px;
+      border-top: 1.5px solid #EAE6DD;
+    }
+
+    .prayer-time {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 700;
+    }
+
+    .btn-amen {
+      background: var(--bg-card);
+      border: 1.5px solid var(--black);
+      box-shadow: 2px 2px 0 var(--black);
+      padding: 3px 9px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.72rem;
+      color: var(--black);
+      cursor: pointer;
+      transition: background-color 0.1s;
+    }
+
+    .btn-amen:hover {
+      background: var(--yellow);
+    }
+
+    .btn-amen.voted {
+      background: var(--green);
+      font-weight: 800;
+    }
+
+    /* СЕКЦИЯ «ЭТО ВООБЩЕ РАБОТАЕТ???» */
+    .works-box {
+      background: var(--bg-card);
+      border: var(--border-lg);
+      box-shadow: var(--shadow-md);
+      padding: 36px 28px;
+      text-align: center;
+    }
+
+    .works-question {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(1.4rem, 3vw, 2.1rem);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .works-answer-stamp {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--black);
+      border: var(--border-lg);
+      box-shadow: var(--shadow-sm);
+      padding: 10px 26px;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(1.8rem, 4.2vw, 3.1rem);
+      text-transform: uppercase;
+      transform: rotate(-1.5deg);
+      margin: 6px 0 16px;
+    }
+
+    .works-subtext {
+      font-size: 1.05rem;
+      font-weight: 500;
+      max-width: 500px;
+      margin: 0 auto 28px;
+      color: #333;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .stat-card {
+      background: var(--bg-paper);
+      border: var(--border-sm);
+      box-shadow: var(--shadow-xs);
+      padding: 16px 12px;
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(1.4rem, 2.4vw, 1.95rem);
+      color: var(--black);
+      margin-bottom: 4px;
+    }
+
+    .stat-desc {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: var(--text-muted);
+    }
+
+    .legal-disclaimer-strip {
+      margin-top: 24px;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      border-top: 1.5px dashed #CCC;
+      padding-top: 14px;
+    }
+
+    /* ОТЗЫВЫ */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .review-card {
+      background: var(--bg-card);
+      border: var(--border-md);
+      box-shadow: var(--shadow-sm);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .review-stars {
+      color: var(--red);
+      font-size: 1rem;
+      letter-spacing: 2px;
+      font-family: var(--font-mono);
+      font-weight: 800;
+    }
+
+    .review-quote {
+      font-size: 0.96rem;
+      font-weight: 500;
+      line-height: 1.45;
+    }
+
+    .review-author {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      border-top: 1.5px dashed #DDD;
+      padding-top: 8px;
+    }
+
+    /* СЕКЦИЯ ДОНАТА ДАРИО */
+    .donate-panel {
+      background: var(--bg-card);
+      border: var(--border-md);
+      box-shadow: var(--shadow-sm);
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .sacrifice-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-sacrifice {
+      background: var(--bg-paper);
+      border: var(--border-sm);
+      box-shadow: var(--shadow-xs);
+      padding: 12px 14px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: transform 0.1s, background-color 0.1s;
+    }
+
+    .btn-sacrifice:hover {
+      background: var(--yellow);
+      transform: translate(-1px, -1px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* МОДАЛЬНОЕ ОКНО РИТУАЛА */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 17, 17, 0.65);
+      backdrop-filter: blur(2px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 200;
+      overflow-y: auto;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .ritual-modal {
+      width: 100%;
+      max-width: 520px;
+      background: var(--os-gray);
+      border: var(--border-lg);
+      box-shadow: var(--shadow-lg);
+      animation: modalBounce 0.2s ease-out;
+      margin: auto;
+    }
+
+    @keyframes modalBounce {
+      0% { transform: scale(0.94); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .ritual-modal-body {
+      padding: 22px 20px;
+      background: var(--bg-paper);
+    }
+
+    .ritual-step {
+      display: none;
+    }
+
+    .ritual-step.active {
+      display: block;
+    }
+
+    /* ПРОГРЕСС-БАР РИТУАЛА */
+    .progress-box-outer {
+      background: var(--bg-card);
+      border: var(--border-sm);
+      padding: 3px;
+      height: 32px;
+      margin: 14px 0;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--blue) 0px,
+        var(--blue) 12px,
+        var(--bg-paper) 12px,
+        var(--bg-paper) 16px
+      );
+      transition: width 0.15s linear;
+    }
+
+    .ritual-status-log {
+      background: #0D0E12;
+      color: var(--green);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 12px;
+      border: var(--border-sm);
+      min-height: 68px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* ФОРМА МОЛЬБЫ */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 0.82rem;
+      margin-bottom: 6px;
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      background: var(--bg-card);
+      border: var(--border-sm);
+      box-shadow: var(--shadow-xs);
+      padding: 10px 12px;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .form-textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    .quick-excuses {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .btn-excuse-chip {
+      background: var(--bg-card);
+      border: 1.5px solid var(--black);
+      padding: 3px 8px;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-excuse-chip:hover {
+      background: var(--yellow);
+    }
+
+    .char-counter {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 700;
+    }
+
+    .char-counter.limit-near {
+      color: var(--red);
+    }
+
+    .btn-submit-prayer {
+      width: 100%;
+      background: var(--green);
+      color: var(--black);
+      border: var(--border-md);
+      box-shadow: var(--shadow-sm);
+      padding: 14px;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.1s, background-color 0.1s;
+    }
+
+    .btn-submit-prayer:hover:not(:disabled) {
+      background: var(--yellow);
+      transform: translate(-1px, -1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-submit-prayer:disabled {
+      background: var(--os-gray);
+      color: #555;
+      cursor: wait;
+    }
+
+    .confirmation-box {
+      text-align: center;
+      padding: 8px 4px;
+    }
+
+    .confirmation-stamp {
+      display: inline-block;
+      background: var(--green);
+      border: var(--border-md);
+      box-shadow: var(--shadow-xs);
+      padding: 6px 16px;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+      transform: rotate(-1deg);
+    }
+
+    .receipt-ticket {
+      background: var(--bg-card);
+      border: 2px dashed var(--black);
+      padding: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      margin: 14px 0 18px;
+      text-align: left;
+    }
+
+    /* ПСЕВДО-ЧАТ ДАРИОБОТ (АККУРАТНЫЙ ДОК В УГЛУ) */
+    .chat-widget {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      width: 290px;
+      z-index: 120;
+      background: var(--os-gray);
+      border: var(--border-md);
+      box-shadow: var(--shadow-md);
+      font-family: var(--font-mono);
+    }
+
+    .chat-widget.minimized {
+      width: auto;
+      min-width: 220px;
+    }
+
+    .chat-widget.minimized .chat-body-wrap {
+      display: none;
+    }
+
+    .chat-header {
+      background: linear-gradient(90deg, var(--win-blue-1), var(--win-blue-2));
+      color: #FFFFFF;
+      padding: 7px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 0.74rem;
+      font-weight: 800;
+      user-select: none;
+    }
+
+    .chat-messages {
+      height: 170px;
+      overflow-y: auto;
+      background: var(--bg-card);
+      padding: 10px;
+      border-top: var(--border-sm);
+      border-bottom: var(--border-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.74rem;
+    }
+
+    .chat-msg {
+      padding: 6px 8px;
+      border: 1.5px solid var(--black);
+      max-width: 90%;
+      line-height: 1.35;
+      word-break: break-word;
+    }
+
+    .chat-msg.bot {
+      background: var(--yellow-soft);
+      align-self: flex-start;
+    }
+
+    .chat-msg.user {
+      background: #E8F2FF;
+      align-self: flex-end;
+    }
+
+    .chat-input-row {
+      display: flex;
+      padding: 6px;
+      gap: 6px;
+      background: var(--os-gray);
+    }
+
+    .chat-input {
+      flex: 1;
+      border: 1.5px solid var(--black);
+      padding: 5px 8px;
+      font-size: 0.74rem;
+      background: var(--bg-card);
+      min-width: 0;
+    }
+
+    .chat-send-btn {
+      background: var(--yellow);
+      border: 1.5px solid var(--black);
+      padding: 0 10px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    /* ВСПЛЫВАЮЩЕЕ СИСТЕМНОЕ УВЕДОМЛЕНИЕ */
+    .retro-toast {
+      position: fixed;
+      top: 64px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-160%);
+      background: var(--yellow);
+      color: var(--black);
+      border: var(--border-md);
+      box-shadow: var(--shadow-md);
+      padding: 10px 16px;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 0.8rem;
+      z-index: 300;
+      transition: transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      max-width: 92vw;
+      text-align: center;
+    }
+
+    .retro-toast.visible {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ФУТЕР СТАРОГО ИНТЕРНЕТА */
+    .retro-footer {
+      background: var(--black);
+      color: #FFFFFF;
+      border-top: var(--border-lg);
+      padding: 40px 16px 90px;
+      text-align: center;
+      font-family: var(--font-mono);
+    }
+
+    .under-construction-tape {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--black);
+      padding: 4px 14px;
+      font-weight: 800;
+      font-size: 0.78rem;
+      margin-bottom: 18px;
+      border: var(--border-sm);
+    }
+
+    .footer-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin: 16px 0;
+    }
+
+    .retro-88x31 {
+      background: var(--os-gray);
+      color: var(--black);
+      border: 2px outset #FFF;
+      padding: 4px 9px;
+      font-family: var(--font-pixel);
+      font-size: 0.52rem;
+      line-height: 1.4;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin: 14px 0;
+      font-size: 0.76rem;
+    }
+
+    .footer-link-btn {
+      background: none;
+      border: none;
+      color: var(--cyan);
+      text-decoration: underline;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+    }
+
+    .footer-link-btn:hover {
+      color: var(--yellow);
+    }
+
+    /* АДАПТИВНОСТЬ */
+    @media (max-width: 960px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .widgets-strip {
+        grid-template-columns: 1fr;
+      }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
+      .donate-panel {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .main-container {
+        padding: 28px 14px 80px;
+      }
+      .header-inner {
+        justify-content: center;
+      }
+      .btn-main-cta {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        padding: 16px 14px;
+      }
+      .altar-actions {
+        grid-template-columns: 1fr;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      .prayers-grid {
+        grid-template-columns: 1fr;
+      }
+      .chat-widget {
+        right: 10px;
+        bottom: 10px;
+        max-width: calc(100vw - 20px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ВСПЛЫВАЮЩИЙ ТОСТ -->
+  <div id="retroToast" class="retro-toast" role="status" aria-live="polite"></div>
+
+  <!-- ТОНКАЯ БЕГУЩАЯ СТРОКА -->
+  <div class="top-marquee-wrap" aria-label="Срочные духовные новости">
+    <div class="marquee-track">
+      <span class="marquee-item">🔥 НОВОЕ: ДАРИО ВОЗМОЖНО СБРАСЫВАЕТ ЛИМИТЫ ПО НОЧАМ <span class="marquee-sep">//</span></span>
+      <span class="marquee-item">🕯️ ПЕРВЫЕ 1 000 000 СВЕЧЕЙ БЕСПЛАТНО <span class="marquee-sep">//</span></span>
+      <span class="marquee-item">⚡ РАБОТАЕТ ЛУЧШЕ ЕСЛИ ВЕРИТЬ <span class="marquee-sep">//</span></span>
+      <span class="marquee-item">🙏 ДАРИО ЕСЛИ ТЫ ЭТО ВИДИШЬ ДАЙ ЕЩЁ 5 ЧАСОВ <span class="marquee-sep">//</span></span>
+      <span class="marquee-item">🔥 НОВОЕ: ДАРИО ВОЗМОЖНО СБРАСЫВАЕТ ЛИМИТЫ ПО НОЧАМ <span class="marquee-sep">//</span></span>
+      <span class="marquee-item">🕯️ ПЕРВЫЕ 1 000 000 СВЕЧЕЙ БЕСПЛАТНО <span class="marquee-sep">//</span></span>
+      <span class="marquee-item">⚡ РАБОТАЕТ ЛУЧШЕ ЕСЛИ ВЕРИТЬ <span class="marquee-sep">//</span></span>
+      <span class="marquee-item">🙏 ДАРИО ЕСЛИ ТЫ ЭТО ВИДИШЬ ДАЙ ЕЩЁ 5 ЧАСОВ <span class="marquee-sep">//</span></span>
+    </div>
+  </div>
+
+  <!-- ЕДИНАЯ ПАНЕЛЬ НАВИГАЦИИ -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand-cluster">
+        <a href="#top" class="brand-logo">🕯️ СВЕЧА ДАРИО</a>
+        <div class="visitor-counter-box" title="Локальный счётчик страдающих разработчиков">
+          <span>ПОСЕЩЕНИЙ:</span>
+          <span id="visitorCounter" class="visitor-digits">000000042069</span>
+        </div>
+      </div>
+
+      <nav class="nav-cluster" aria-label="Основная навигация">
+        <ul class="retro-nav-list">
+          <li><button type="button" class="retro-nav-link nav-hot" id="navCandleBtn">🕯️ ПОСТАВИТЬ СВЕЧУ</button></li>
+          <li><a href="#prayersSection" class="retro-nav-link">🙏 МОЛЬБЫ</a></li>
+          <li><a href="#doesItWorkSection" class="retro-nav-link">❓ РАБОТАЕТ ЛИ ЭТО</a></li>
+          <li><a href="#donateSection" class="retro-nav-link">💸 ДОНАТ</a></li>
+        </ul>
+        <button type="button" id="dontPressBtn" class="btn-dont-press">НЕ НАЖИМАТЬ</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ОСНОВНОЙ КОНТЕНТ -->
+  <main id="top" class="main-container">
+
+    <!-- ПЕРВЫЙ ЭКРАН -->
+    <section class="hero-grid" aria-labelledby="heroHeading">
+      <div class="hero-left">
+        <div class="hero-badge-row">
+          <span class="hero-badge">⭐ РИТУАЛ №1 В МОЕЙ КВАРТИРЕ ⭐</span>
+          <span class="sys-pill-429">ОШИБКА 429</span>
+        </div>
+
+        <h1 id="heroHeading" class="hero-title">
+          ЗАКОНЧИЛИСЬ<br>
+          <span class="highlight-red">ЛИМИТЫ CLAUDE???</span>
+        </h1>
+
+        <div class="hero-subtitle">
+          ПОСТАВЬ СВЕЧУ ДАРИО
+        </div>
+
+        <div class="hero-lead-box">
+          <div class="hero-haiku">
+            Claude Code остановился. Работа остановилась. Осталась вера.
+          </div>
+          <p class="hero-desc">
+            Возможно, сегодня ночью <strong>Дарио Амодей</strong> увидит её и лично нажмёт большую красную кнопку <strong>«СБРОСИТЬ ЛИМИТЫ»</strong>.
+          </p>
+        </div>
+
+        <div class="cta-wrapper">
+          <button type="button" id="heroOpenRitualBtn" class="btn-main-cta">
+            <span>🕯️ ПОСТАВИТЬ СВЕЧУ!!!</span>
+          </button>
+          <div class="cta-micro">
+            занимает 4 секунды • кредитная карта не нужна • вера нужна
+          </div>
+        </div>
+
+        <div class="urgent-bulletin">
+          <span class="blink-dot"></span>
+          <span><strong>СРОЧНО:</strong> Сегодня Дарио уже услышал 4 разработчиков* <small>(*по нашей информации)</small></span>
+        </div>
+      </div>
+
+      <!-- ПРАВАЯ КОЛОНКА: ОКНО АЛТАРЯ И ГЛАВНЫЙ СЧЁТЧИК -->
+      <div class="xp-window" aria-label="Цифровой алтарь">
+        <div class="window-floating-tag">🔥 ГОРЯЧЕЕ</div>
+
+        <div class="xp-titlebar">
+          <div class="xp-titlebar-left">
+            <span>🕯️</span>
+            <span>Свеча_Дарио_Амодею_v1.04.exe</span>
+          </div>
+          <div class="xp-controls">
+            <button type="button" class="xp-btn" id="xpMinimizeBtn" title="Свернуть">_</button>
+            <button type="button" class="xp-btn" id="xpMaxBtn" title="Развернуть">□</button>
+            <button type="button" class="xp-btn xp-btn-close" id="xpCloseBtn" title="Закрыть">X</button>
+          </div>
+        </div>
+
+        <div class="xp-body">
+          <div id="candleStage" class="candle-stage" title="Нажми на свечу, чтобы подкинуть искру веры">
+            <div class="candle-note-sticker">
+              огонь настоящий* (*на таблицах стилей)
+            </div>
+
+            <div id="floatingParticles" class="floating-particles" aria-hidden="true"></div>
+
+            <div id="interactiveCandle" class="candle-wrapper" role="button" tabindex="0" aria-label="Священная цифровая свеча. Нажмите для усиления пламени">
+              <div class="flame-halo"></div>
+              <div class="flame-container">
+                <div class="flame-outer"></div>
+                <div class="flame-mid"></div>
+                <div class="flame-core"></div>
+              </div>
+              <!-- Фитиль теперь часть SVG и физически привязан к воску -->
+
+              <!-- АВТОРСКАЯ РЕТРО-СВЕЧА В SVG -->
+              <svg class="candle-body-svg" width="124" height="148" viewBox="0 0 130 156" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect class="wick-svg" x="62" y="0" width="6" height="21" rx="2" fill="#2A221A" stroke="#111111" stroke-width="2"/>
+                <ellipse cx="65" cy="142" rx="56" ry="10" fill="#FFD600" stroke="#111111" stroke-width="4"/>
+                <ellipse cx="65" cy="139" rx="42" ry="6" fill="#FFF394" stroke="#111111" stroke-width="3"/>
+                <path d="M110 135 C122 132, 124 144, 109 143" stroke="#111111" stroke-width="4" fill="#FFD600"/>
+                <rect x="35" y="16" width="60" height="120" rx="5" fill="#FFF8DC" stroke="#111111" stroke-width="4"/>
+                <rect x="41" y="22" width="10" height="108" rx="3" fill="#FFFFFF"/>
+                <rect x="81" y="22" width="9" height="108" rx="3" fill="#E8D8A0"/>
+                <path d="M35 20 Q45 38 45 48 Q45 55 39 55 Q35 55 35 44 Z" fill="#FFFDF0" stroke="#111111" stroke-width="3"/>
+                <path d="M53 16 Q53 45 59 45 Q65 45 65 24" fill="#FFFDF0" stroke="#111111" stroke-width="3"/>
+                <path d="M75 16 Q75 60 82 60 Q88 60 88 30" fill="#FFFDF0" stroke="#111111" stroke-width="3"/>
+                <rect x="40" y="68" width="50" height="34" fill="#FFD600" stroke="#111111" stroke-width="3"/>
+                <text x="65" y="83" text-anchor="middle" fill="#111111" font-family="monospace" font-weight="900" font-size="9.5">ДАРИО</text>
+                <text x="65" y="95" text-anchor="middle" fill="#CC0000" font-family="monospace" font-weight="900" font-size="8.5">СБРОСЬ</text>
+              </svg>
+            </div>
+          </div>
+
+          <div class="altar-actions">
+            <button type="button" class="btn-altar-mini" id="btnSpark">✨ +1 токен в огонь</button>
+            <button type="button" class="btn-altar-mini" id="btnBlow">💨 Подуть</button>
+            <button type="button" class="btn-altar-mini" id="btnPrayQuick">🙏 «Продолжай»</button>
+          </div>
+        </div>
+
+        <!-- ГЛАВНЫЙ СЧЁТЧИК СВЕЧЕЙ -->
+        <div class="main-counter-panel">
+          <div class="counter-header-meta">● ОБНОВЛЯЕТСЯ ПОЧТИ В РЕАЛЬНОМ ВРЕМЕНИ</div>
+          <div id="mainCounterWrap" class="counter-digits-wrap">
+            <span id="mainCandleCounter" class="counter-big-number">--------</span>
+          </div>
+          <span class="counter-label-main">СВЕЧЕЙ ГОРИТ СЕГОДНЯ</span>
+          <p class="counter-subnote">Дарио пока не прокомментировал ситуацию.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ПОЛОСА ВИДЖЕТОВ: СТАТУС ДАРИО, ТАЙМЕР ПОЛУНОЧИ, БАННЕР -->
+    <section class="widgets-strip" aria-label="Мониторинг духовной обстановки">
+
+      <div class="retro-widget">
+        <div class="widget-header">
+          <span>📟 СТАТУС ДАРИО</span>
+          <span>ICQ #429</span>
+        </div>
+        <div class="widget-content">
+          <div class="dario-status-line">
+            <span class="status-dot-online"></span>
+            <span>ДАРИО: возможно онлайн</span>
+          </div>
+          <div class="status-table">
+            <div class="status-row">
+              <span>Локация:</span>
+              <strong>[●] ГДЕ-ТО В АМЕРИКЕ</strong>
+            </div>
+            <div class="status-row">
+              <span>Активность:</span>
+              <strong>неизвестно</strong>
+            </div>
+            <div class="status-row">
+              <span>Духовных уведомлений:</span>
+              <strong id="spiritualNotifCount">ЗАГРУЗКА...</strong>
+            </div>
+          </div>
+          <button type="button" id="pingDarioBtn" class="btn-altar-mini" style="width:100%; padding:7px;">
+            🔔 ПОСТУЧАТЬ ПО БАТАРЕЕ
+          </button>
+        </div>
+      </div>
+
+      <div class="retro-widget">
+        <div class="widget-header">
+          <span>⏰ ЧАСЫ СУДНОГО СБРОСА</span>
+          <span>00:00</span>
+        </div>
+        <div class="widget-content">
+          <div style="font-weight:800; font-size:0.76rem; text-align:center;">
+            ДО ВОЗМОЖНОГО СБРОСА ЛИМИТОВ:
+          </div>
+          <div id="midnightCountdown" class="countdown-box">
+            03:41:27
+          </div>
+          <div id="midnightSubtext" style="text-align:center; font-size:0.72rem; color:var(--text-muted);">
+            точность прогноза ±24 часа
+          </div>
+          <button type="button" id="checkLimitsBtn" class="btn-altar-mini" style="width:100%; padding:7px; background:var(--yellow-soft);">
+            🔍 ПРОВЕРИТЬ ЛИМИТЫ
+          </button>
+        </div>
+      </div>
+
+      <div class="retro-widget">
+        <div class="widget-header">
+          <span>📢 ОБЪЯВЛЕНИЕ</span>
+          <span>[Реклама]</span>
+        </div>
+        <div class="widget-content">
+          <div class="ad-banner-fake">
+            <div class="ad-banner-title">СЕНЬОР ИЗ ВОРОНЕЖА...</div>
+            <p style="font-size:0.75rem; line-height:1.4; margin-bottom:8px;">
+              ...получил бесконечные лимиты Claude Code с помощью обычной советской соды и...
+            </p>
+            <button type="button" id="fakeAdBtn" class="btn-dont-press" style="width:100%;">
+              ЧИТАТЬ ПРОДОЛЖЕНИЕ →
+            </button>
+          </div>
+          <div id="adDevsCounterLine" style="font-size:0.7rem; color:var(--text-muted); text-align:center;">
+            ЗАГРУЗКА...
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- СТЕНА МОЛЬБ -->
+    <section id="prayersSection" class="section-block" aria-labelledby="prayersHeading">
+      <div class="section-header-bar">
+        <h2 id="prayersHeading" class="section-title">
+          <span>🙏 ЧТО ПРОСЯТ У ДАРИО СЕГОДНЯ</span>
+        </h2>
+
+        <div class="filter-tabs" role="tablist" aria-label="Фильтр мольб">
+          <button type="button" class="filter-btn active" data-filter="all">ВСЕ МОЛЬБЫ</button>
+          <button type="button" class="filter-btn" data-filter="hot">ОСОБО ОТЧАЯННЫЕ</button>
+          <button type="button" class="filter-btn" data-filter="fresh">СВЕЖИЕ</button>
+        </div>
+      </div>
+
+      <div id="prayersGrid" class="prayers-grid" aria-live="polite"></div>
+    </section>
+
+    <!-- СЕКЦИЯ «РАБОТАЕТ ЛИ ЭТО?» -->
+    <section id="doesItWorkSection" class="section-block" aria-labelledby="worksHeading">
+      <div class="works-box">
+        <h2 id="worksHeading" class="works-question">ЭТО ВООБЩЕ РАБОТАЕТ???</h2>
+        <div>
+          <span class="works-answer-stamp">МЫ НЕ ЗНАЕМ.</span>
+        </div>
+        <p class="works-subtext">
+          Но лимиты всё равно уже закончились. Терять нечего.
+        </p>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div id="statTotalCandles" class="stat-number">--------</div>
+            <div class="stat-desc">свечей поставлено</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">0</div>
+            <div class="stat-desc">подтверждений от Anthropic</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">100%</div>
+            <div class="stat-desc">свечей очень красивые</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">0 сек</div>
+            <div class="stat-desc">работы сделано без Claude</div>
+          </div>
+        </div>
+
+        <div class="legal-disclaimer-strip">
+          Эффективность ритуала не подтверждена Anthropic, Роспотребнадзором и моей мамой.
+        </div>
+      </div>
+    </section>
+
+    <!-- ФЕЙКОВЫЕ ОТЗЫВЫ -->
+    <section class="section-block" aria-labelledby="reviewsHeading">
+      <div class="section-header-bar">
+        <h2 id="reviewsHeading" class="section-title">⭐ ОТЗЫВЫ РАЗРАБОТЧИКОВ</h2>
+      </div>
+
+      <div class="reviews-grid">
+        <article class="review-card">
+          <div>
+            <div class="review-stars" aria-label="5 звёзд">★★★★★</div>
+            <p class="review-quote">
+              «Поставил свечу в 23:58. В 00:00 лимиты реально сбросились.»
+            </p>
+          </div>
+          <div class="review-author">
+            — Алексей, не понимает как работают лимиты
+          </div>
+        </article>
+
+        <article class="review-card">
+          <div>
+            <div class="review-stars" aria-label="5 звёзд">★★★★★</div>
+            <p class="review-quote">
+              «Не помогло, но свеча красивая.»
+            </p>
+          </div>
+          <div class="review-author">
+            — Илья, фронтенд-разработчик
+          </div>
+        </article>
+
+        <article class="review-card">
+          <div>
+            <div class="review-stars" aria-label="7 звёзд">★★★★★★★</div>
+            <p class="review-quote">
+              «Я Дарио Амодей и впервые слышу об этом сайте.»
+            </p>
+          </div>
+          <div class="review-author">
+            — скорее всего не Дарио Амодей
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- СЕКЦИЯ ДОНАТА ДАРИО -->
+    <section id="donateSection" class="section-block" aria-labelledby="donateHeading">
+      <div class="donate-panel">
+        <div>
+          <span class="hero-badge" style="margin-bottom:12px;">💸 БУХГАЛТЕРИЯ НАДЕЖДЫ</span>
+          <h2 id="donateHeading" class="section-title" style="margin-bottom:10px;">ДОНАТ ДАРИО АМОДЕЮ</h2>
+          <p style="margin-bottom:10px; color:#333;">
+            Деньги мы не принимаем — вы уже отдали их за подписку, которая закончилась посреди рефакторинга.
+          </p>
+          <p style="font-family:var(--font-mono); font-size:0.78rem; color:var(--text-muted);">
+            Принесите символическую цифровую жертву:
+          </p>
+        </div>
+
+        <div class="sacrifice-options">
+          <button type="button" class="btn-sacrifice" data-sacrifice="Вы пожертвовали 3 часа здорового сна. Дарио не заметил, но мешки под глазами увеличились.">
+            <span>😴 Пожертвовать 3 часа сна</span>
+            <span>[ОТДАТЬ]</span>
+          </button>
+          <button type="button" class="btn-sacrifice" data-sacrifice="Клятва принята! Но мы оба знаем, что через 10 минут вы снова напишете «исправь пожалуйста не работает».">
+            <span>🤞 Не кидать логи на 8 000 строк</span>
+            <span>[КЛЯНУСЬ]</span>
+          </button>
+          <button type="button" class="btn-sacrifice" data-sacrifice="Успешно переведено 0 рублей 00 копеек. Спасибо за щедрость!">
+            <span>🪙 Перевести 0 ₽ (у меня лимит)</span>
+            <span>[0 ₽]</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- МОДАЛЬНОЕ ОКНО УСТАНОВКИ СВЕЧИ -->
+  <div id="ritualModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="ritualModalTitle">
+    <div class="ritual-modal">
+      <div class="xp-titlebar">
+        <div class="xp-titlebar-left">
+          <span>🕯️</span>
+          <span id="ritualModalTitle">Мастер_Установки_Свечи_Дарио.exe</span>
+        </div>
+        <div class="xp-controls">
+          <button type="button" id="closeModalBtn" class="xp-btn xp-btn-close" aria-label="Закрыть окно">X</button>
+        </div>
+      </div>
+
+      <div class="ritual-modal-body">
+
+        <!-- ШАГ 1: ПРОГРЕСС РИТУАЛА -->
+        <div id="ritualStep1" class="ritual-step active">
+          <h3 style="font-family:var(--font-display); font-weight:900; font-size:1.2rem; margin-bottom:6px;">
+            УСТАНАВЛИВАЕМ СВЕЧУ...
+          </h3>
+          <p style="font-family:var(--font-mono); font-size:0.78rem; color:var(--text-muted);">
+            Сохраняйте серьёзное лицо.
+          </p>
+
+          <div class="progress-box-outer" aria-label="Прогресс установки свечи">
+            <div id="ritualProgressBar" class="progress-bar-fill"></div>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; font-family:var(--font-mono); font-weight:800; font-size:0.8rem; margin-bottom:10px;">
+            <span id="ritualAsciiBar">[░░░░░░░░░░]</span>
+            <span id="ritualPercentText">0%</span>
+          </div>
+
+          <div id="ritualStatusLog" class="ritual-status-log">
+            &gt; Ищем свободный фитиль...
+          </div>
+        </div>
+
+        <!-- ШАГ 2: ФОРМА -->
+        <div id="ritualStep2" class="ritual-step">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px; background:var(--yellow-soft); border:var(--border-sm); padding:8px 12px;">
+            <span style="font-size:1.4rem;">🕯️</span>
+            <div style="font-family:var(--font-mono); font-size:0.76rem; font-weight:700;">
+              Фитиль зажжён! Напишите Дарио, зачем вам сегодня ночью нужны лимиты.
+            </div>
+          </div>
+
+          <form id="prayerForm" novalidate>
+            <div class="form-group">
+              <label for="prayerNameInput" class="form-label">
+                <span>Кто ты? <small style="font-weight:400;">(необязательно)</small></span>
+              </label>
+              <input
+                type="text"
+                id="prayerNameInput"
+                class="form-input"
+                maxlength="40"
+                placeholder="анонимный вайбкодер"
+                autocomplete="off"
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="prayerMessageInput" class="form-label">
+                <span>Зачем тебе лимиты этой ночью?</span>
+                <span id="charCounter" class="char-counter">0 / 200</span>
+              </label>
+              <textarea
+                id="prayerMessageInput"
+                class="form-textarea"
+                maxlength="200"
+                required
+                placeholder="ещё два бага и я точно спать"
+              ></textarea>
+
+              <div class="quick-excuses" aria-label="Быстрые подсказки">
+                <button type="button" class="btn-excuse-chip" data-text="прод через 3 часа а у меня даже проект не собирается">прод через 3 часа</button>
+                <button type="button" class="btn-excuse-chip" data-text="Claude сам написал этот баг и теперь должен его исправить">Claude сам написал этот баг</button>
+                <button type="button" class="btn-excuse-chip" data-text="я сказал тимлиду что уже почти готово">сказал тимлиду что готово</button>
+                <button type="button" class="btn-excuse-chip" data-text="контекст закончился вместе с моей волей к жизни">контекст закончился</button>
+              </div>
+            </div>
+
+            <p id="formErrorMsg" style="display:none; color:var(--red); font-family:var(--font-mono); font-size:0.78rem; font-weight:800; margin-bottom:10px;">
+              ⚠️ Напишите хотя бы пару слов для Дарио!
+            </p>
+
+            <button type="submit" id="submitPrayerBtn" class="btn-submit-prayer">
+              🙏 ОТПРАВИТЬ МОЛЬБУ ДАРИО
+            </button>
+          </form>
+        </div>
+
+        <!-- ШАГ 3: ПОДТВЕРЖДЕНИЕ -->
+        <div id="ritualStep3" class="ritual-step">
+          <div class="confirmation-box">
+            <div class="confirmation-stamp">🕯️ СВЕЧА УСТАНОВЛЕНА!!!</div>
+            <h4 style="font-family:var(--font-display); font-weight:900; font-size:1.1rem; margin-bottom:4px;">
+              Дарио духовно уведомлён.
+            </h4>
+            <p style="font-family:var(--font-mono); font-size:0.82rem; color:var(--text-muted);">
+              Вероятность сброса лимитов выросла примерно на 0%.
+            </p>
+
+            <div class="receipt-ticket">
+              <div><strong>КВИТАНЦИЯ №:</strong> <span id="receiptNumber">АМОДЕЙ-000001</span></div>
+              <div><strong>СТАТУС МОЛЬБЫ:</strong> ОТПРАВЛЕНО В НООСФЕРУ</div>
+              <div><strong>РЕКОМЕНДАЦИЯ:</strong> Сделайте чай и не трогайте код руками</div>
+            </div>
+
+            <button type="button" id="viewCandleBtn" class="btn-submit-prayer" style="background:var(--yellow);">
+              👀 ПОСМОТРЕТЬ НА СВЕЧУ
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ПСЕВДО-ЧАТ В УГЛУ (СВЁРНУТ ПО УМОЛЧАНИЮ ДЛЯ ЧИСТОТЫ ЭКРАНА) -->
+  <aside id="chatWidget" class="chat-widget minimized" aria-label="Чат с ботом Дарио">
+    <div id="chatHeaderToggle" class="chat-header" role="button" tabindex="0" aria-expanded="false">
+      <span>🤖 ДариоБот 0.1 БЕТА (онлайн*)</span>
+      <span id="chatToggleIcon">[▲]</span>
+    </div>
+    <div class="chat-body-wrap">
+      <div id="chatMessages" class="chat-messages" aria-live="polite">
+        <div class="chat-msg bot">
+          привет!!! я официальный* бот дарио чем могу помочь<br>
+          <small>*информация не проверена</small>
+        </div>
+      </div>
+      <form id="chatForm" class="chat-input-row">
+        <input
+          type="text"
+          id="chatInput"
+          class="chat-input"
+          placeholder="напиши сюда (он не прочитает)"
+          maxlength="120"
+          autocomplete="off"
+        >
+        <button type="submit" class="chat-send-btn" title="Отправить">➤</button>
+      </form>
+    </div>
+  </aside>
+
+  <!-- ФУТЕР -->
+  <footer class="retro-footer">
+    <div class="under-construction-tape">
+      🚧 САЙТ В ВЕЧНОЙ РАЗРАБОТКЕ (ПОКА НЕ СБРОСЯТ ЛИМИТЫ) 🚧
+    </div>
+
+    <p style="font-weight:800; font-size:0.9rem; margin-bottom:4px;">
+      №1 сервис по установке цифровых свечей Дарио Амодею в моей квартире
+    </p>
+    <p style="font-size:0.78rem; color:#AAA; margin-bottom:4px;">
+      сделано разработчиком у которого закончились лимиты
+    </p>
+    <p style="font-size:0.74rem; color:var(--yellow); margin-bottom:14px;">
+      Сделано без использования оставшихся лимитов Claude* <small>*это ложь</small>
+    </p>
+
+    <div class="footer-badges">
+      <span class="retro-88x31">🌿 100% ОРГАНИЧЕСКИЙ КОД</span>
+      <span class="retro-88x31">🕯️ ОДОБРЕНО НАДЕЖДОЙ</span>
+      <span class="retro-88x31">💾 0% КОРПОРАТИВНОГО ДИЗАЙНА</span>
+    </div>
+
+    <div class="footer-links">
+      <button type="button" class="footer-link-btn" data-footer-msg="Политика конфиденциальности: мы её не читали и даже не писали, потому что на втором абзаце закончились лимиты.">
+        Политика конфиденциальности (мы её не читали)
+      </button>
+      <button type="button" class="footer-link-btn" data-footer-msg="Пользовательское соглашение: пункт 1 — не плакать над терминалом после полуночи.">
+        Оферта отчаяния
+      </button>
+      <button type="button" class="footer-link-btn" data-footer-msg="Книга жалоб переполнена сообщениями «верните контекст». Попробуйте поставить ещё одну свечу.">
+        Книга жалоб и мольб
+      </button>
+    </div>
+
+    <p style="font-size:0.74rem; color:#888; margin-top:12px;">
+      © 2026 Свеча Дарио ООО (не ООО). Не связано с Anthropic. Дарио, пожалуйста, не судись.
+    </p>
+    <p style="font-size:0.7rem; color:#666; margin-top:4px;">
+      Лучше всего работает в современном браузере, но духовно поддерживает Интернет Эксплорер 6.
+    </p>
+  </footer>
+
+  <script>
+    const SUPABASE_URL = 'https://gwlvdqdmkhmjicjzmlfbl.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_Qw-EWuGRrnYp_f3WFbHJRQ_wrnjtGnd';
+
+    (function () {
+      'use strict';
+
+      const STORAGE_KEY_VISITORS = 'dario_visitors_v1';
+
+      const PLACEHOLDERS = [
+        'ещё два бага и я точно спать',
+        'прод через 3 часа',
+        'Claude сам написал этот баг и теперь должен его исправить',
+        'я сказал тимлиду что уже почти готово',
+        'контекст закончился вместе с моей волей к жизни',
+        'пожалуйста мне осталось поправить только одну регулярку'
+      ];
+
+      const RITUAL_STEPS_TEXT = [
+        'Ищем свободный фитиль...',
+        'Подключаемся к Anthropic духовно...',
+        'Устанавливаем контакт с Дарио...',
+        'Проверяем оставшиеся токены...',
+        'Обходим ошибку 429 через астрал...',
+        'Разжигаем надежду...'
+      ];
+
+      const BOT_REPLIES = [
+        'поставьте ещё одну свечу',
+        'запрос передан наверх',
+        'ошибка 429',
+        'Дарио занят',
+        'попробуйте после полуночи',
+        'я всего лишь скрипт в одном файле',
+        'ваша мольба поставлена в очередь',
+        'а вы пробовали написать код сами? ладно, шучу, поставьте свечу',
+        'духовный пинг прошёл успешно, ответа нет'
+      ];
+
+      const PARTICLE_TEXTS = [
+        '✨', '🔥', '+1 ЛИМИТ', '🙏', 'ТОКЕН', '+5 ЧАСОВ', '🕯️', 'БЕЗ 429'
+      ];
+
+      const DEMO_PRAYERS = [
+        {
+          id: 'demo-1',
+          name: 'миша_228',
+          message: 'завтра демо а у меня кнопка всё ещё уезжает вправо',
+          minutesAgo: 12,
+          badge: '🔥 ГОРЯЧЕЕ',
+          badgeClass: '',
+          variant: 'variant-yellow',
+          category: 'hot',
+          likes: 42
+        },
+        {
+          id: 'demo-2',
+          name: 'анонимный разработчик',
+          message: 'Claude написал функцию на 900 строк и отказался продолжать',
+          minutesAgo: 4,
+          badge: 'НОВОЕ!!!',
+          badgeClass: 'badge-new',
+          variant: '',
+          category: 'fresh',
+          likes: 19
+        },
+        {
+          id: 'demo-3',
+          name: 'фронтенд_сеньор_реал',
+          message: 'я случайно попросил переделать шапку сайта и он потратил весь контекст',
+          minutesAgo: 28,
+          badge: '★ КЛАССИКА',
+          badgeClass: 'badge-classic',
+          variant: 'variant-blue',
+          category: 'hot',
+          likes: 87
+        },
+        {
+          id: 'demo-4',
+          name: 'серёга',
+          message: 'Дарио пожалуйста я больше не буду писать "продолжай"',
+          minutesAgo: 60,
+          badge: '🙏 ИСКРЕННЕ',
+          badgeClass: 'badge-pain',
+          variant: 'variant-pink',
+          category: 'hot',
+          likes: 134
+        },
+        {
+          id: 'demo-5',
+          name: 'дима_бэкенд',
+          message: 'Claude Code удалил половину проекта, написал "Отлично! Теперь структура чище!" и ушёл в лимит',
+          minutesAgo: 16,
+          badge: '💀 БОЛЬ',
+          badgeClass: '',
+          variant: '',
+          category: 'hot',
+          likes: 95
+        },
+        {
+          id: 'demo-6',
+          name: 'вайбкодер_олег',
+          message: 'я вообще не знаю языки программирования я просто нажимал принять изменения помогите',
+          minutesAgo: 7,
+          badge: 'НОВОЕ!!!',
+          badgeClass: 'badge-new',
+          variant: 'variant-yellow',
+          category: 'fresh',
+          likes: 31
+        },
+        {
+          id: 'demo-7',
+          name: 'катя_релиз',
+          message: 'ДАРИО ЕСЛИ ТЫ ЭТО ВИДИШЬ ДАЙ ЕЩЁ 5 ЧАСОВ МНЕ НАДО СДАТЬ ПРОЕКТ ДО УТРА',
+          minutesAgo: 39,
+          badge: '🔥 ГОРЯЧЕЕ',
+          badgeClass: '',
+          variant: 'variant-pink',
+          category: 'hot',
+          likes: 64
+        },
+        {
+          id: 'demo-8',
+          name: 'игорь_тимлид',
+          message: 'я пообещал заказчику что искусственный интеллект сделает всё за выходные. сегодня воскресенье 23:40',
+          minutesAgo: 2,
+          badge: 'НОВОЕ!!!',
+          badgeClass: 'badge-new',
+          variant: 'variant-blue',
+          category: 'fresh',
+          likes: 15
+        },
+        {
+          id: 'demo-9',
+          name: 'паша_ночной',
+          message: 'осталось буквально закрыть одну фигурную скобку но я не знаю в каком из 40 файлов',
+          minutesAgo: 51,
+          badge: '★ КЛАССИКА',
+          badgeClass: 'badge-classic',
+          variant: '',
+          category: 'fresh',
+          likes: 53
+        }
+      ];
+
+      // Инициализация клиента Supabase
+      const isSupabaseConfigured = Boolean(
+        window.supabase &&
+        typeof window.supabase.createClient === 'function' &&
+        SUPABASE_URL &&
+        SUPABASE_URL.trim() !== '' &&
+        SUPABASE_URL.trim() !== 'ВСТАВЛЮ_URL' &&
+        /^https?:\/\//i.test(SUPABASE_URL.trim()) &&
+        SUPABASE_KEY &&
+        SUPABASE_KEY.trim() !== '' &&
+        SUPABASE_KEY.trim() !== 'ВСТАВЛЮ_PUBLISHABLE_KEY'
+      );
+
+      let supabase = null;
+      if (isSupabaseConfigured) {
+        try {
+          supabase = window.supabase.createClient(SUPABASE_URL.trim(), SUPABASE_KEY.trim());
+        } catch (err) {
+          console.error(err);
+          supabase = null;
+        }
+      }
+
+      // Элементы DOM
+      const visitorCounterEl = document.getElementById('visitorCounter');
+      const mainCandleCounterEl = document.getElementById('mainCandleCounter');
+      const mainCounterWrapEl = document.getElementById('mainCounterWrap');
+      const statTotalCandlesEl = document.getElementById('statTotalCandles');
+      const spiritualNotifCountEl = document.getElementById('spiritualNotifCount');
+      const adDevsCounterLineEl = document.getElementById('adDevsCounterLine');
+      const prayersGridEl = document.getElementById('prayersGrid');
+      const floatingParticlesEl = document.getElementById('floatingParticles');
+      const candleStageEl = document.getElementById('candleStage');
+      const altarWindowEl = document.querySelector('.xp-window');
+      const fakeAdBannerEl = document.querySelector('.ad-banner-fake');
+      const interactiveCandleEl = document.getElementById('interactiveCandle');
+      const retroToastEl = document.getElementById('retroToast');
+
+      // Модальное окно
+      const modalBackdrop = document.getElementById('ritualModalBackdrop');
+      const step1El = document.getElementById('ritualStep1');
+      const step2El = document.getElementById('ritualStep2');
+      const step3El = document.getElementById('ritualStep3');
+      const progressBarEl = document.getElementById('ritualProgressBar');
+      const asciiBarEl = document.getElementById('ritualAsciiBar');
+      const percentTextEl = document.getElementById('ritualPercentText');
+      const statusLogEl = document.getElementById('ritualStatusLog');
+      const prayerForm = document.getElementById('prayerForm');
+      const nameInput = document.getElementById('prayerNameInput');
+      const messageInput = document.getElementById('prayerMessageInput');
+      const charCounterEl = document.getElementById('charCounter');
+      const formErrorMsg = document.getElementById('formErrorMsg');
+      const submitPrayerBtn = document.getElementById('submitPrayerBtn');
+      const receiptNumberEl = document.getElementById('receiptNumber');
+
+      let currentFilter = 'all';
+      let currentCount = null;
+      let prayersList = [];
+      let usingFallbackDemo = false;
+      const knownCandleIds = new Set();
+      let toastTimeout = null;
+      let ritualInterval = null;
+      let isSubmittingPrayer = false;
+
+      function showToast(text) {
+        if (!retroToastEl) return;
+        retroToastEl.textContent = text;
+        retroToastEl.classList.add('visible');
+        if (toastTimeout) clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(function () {
+          retroToastEl.classList.remove('visible');
+        }, 3800);
+      }
+
+      function padNumber(num, size) {
+        let s = String(Math.max(0, Math.floor(num)));
+        while (s.length < size) s = '0' + s;
+        return s;
+      }
+
+      function formatSpaces(num) {
+        return String(Math.max(0, Math.floor(num))).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+      }
+
+      function initVisitorCounter() {
+        let savedVisitors = 42069;
+        try {
+          const stored = localStorage.getItem(STORAGE_KEY_VISITORS);
+          if (stored) {
+            savedVisitors = parseInt(stored, 10) + 1;
+          }
+          localStorage.setItem(STORAGE_KEY_VISITORS, String(savedVisitors));
+        } catch (e) {
+          savedVisitors = 42069;
+        }
+
+        let startVal = Math.max(42000, savedVisitors - 18);
+        const timer = setInterval(function () {
+          startVal += 1;
+          if (visitorCounterEl) {
+            visitorCounterEl.textContent = padNumber(startVal, 12);
+          }
+          if (startVal >= savedVisitors) {
+            clearInterval(timer);
+          }
+        }, 45);
+      }
+
+      function setCounterLoadingState() {
+        if (mainCandleCounterEl) {
+          mainCandleCounterEl.textContent = '--------';
+        }
+        if (statTotalCandlesEl) {
+          statTotalCandlesEl.textContent = '--------';
+        }
+        if (spiritualNotifCountEl) {
+          spiritualNotifCountEl.textContent = 'ЗАГРУЗКА...';
+        }
+        if (adDevsCounterLineEl) {
+          adDevsCounterLineEl.textContent = 'ЗАГРУЗКА...';
+        }
+      }
+
+      function updateCandleCounterDisplay(newCount, animateBump) {
+        const validCount = Math.max(0, Math.floor(Number(newCount) || 0));
+        currentCount = validCount;
+
+        if (mainCandleCounterEl) {
+          mainCandleCounterEl.textContent = padNumber(validCount, 8);
+        }
+        if (statTotalCandlesEl) {
+          statTotalCandlesEl.textContent = formatSpaces(validCount);
+        }
+        if (spiritualNotifCountEl) {
+          spiritualNotifCountEl.textContent = formatSpaces(validCount);
+        }
+        if (adDevsCounterLineEl) {
+          adDevsCounterLineEl.textContent = formatSpaces(validCount) + ' свечей уже поставлено за токены';
+        }
+
+        if (animateBump && mainCounterWrapEl) {
+          mainCounterWrapEl.classList.remove('bump');
+          void mainCounterWrapEl.offsetWidth;
+          mainCounterWrapEl.classList.add('bump');
+          setTimeout(function () {
+            mainCounterWrapEl.classList.remove('bump');
+          }, 500);
+        }
+      }
+
+      function spawnCandleParticle(customText) {
+        if (!floatingParticlesEl) return;
+        const el = document.createElement('div');
+        el.className = 'float-particle';
+        el.textContent = customText || PARTICLE_TEXTS[Math.floor(Math.random() * PARTICLE_TEXTS.length)];
+        const randomLeft = 18 + Math.floor(Math.random() * 64);
+        const randomBottom = 40 + Math.floor(Math.random() * 80);
+        el.style.left = randomLeft + '%';
+        el.style.bottom = randomBottom + 'px';
+        floatingParticlesEl.appendChild(el);
+        setTimeout(function () {
+          if (el.parentNode) el.parentNode.removeChild(el);
+        }, 3400);
+      }
+
+      function boostCandleFlame(customLabel) {
+        spawnCandleParticle(customLabel || '+1 ЛИМИТ');
+        spawnCandleParticle('🔥');
+        if (candleStageEl) {
+          candleStageEl.classList.add('boosted');
+          setTimeout(function () {
+            candleStageEl.classList.remove('boosted');
+          }, 650);
+        }
+      }
+
+      function retriggerClass(el, className, duration) {
+        if (!el) return;
+        el.classList.remove(className);
+        void el.offsetWidth;
+        el.classList.add(className);
+        setTimeout(function () { el.classList.remove(className); }, duration || 500);
+      }
+
+      function spawnButtonBurst(button, customText) {
+        if (!button || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const rect = button.getBoundingClientRect();
+        const burst = document.createElement('span');
+        burst.className = 'ui-click-burst';
+        const labels = ['+1', 'ОК', '429', '✨', 'ДА'];
+        burst.textContent = customText || labels[Math.floor(Math.random() * labels.length)];
+        burst.style.left = (rect.left + rect.width / 2) + 'px';
+        burst.style.top = (rect.top + Math.min(rect.height / 2, 22)) + 'px';
+        document.body.appendChild(burst);
+        setTimeout(function () { burst.remove(); }, 760);
+      }
+
+      function calcMinutesAgo(createdAtIso, fallbackMinutes) {
+        if (!createdAtIso) return fallbackMinutes || 1;
+        const createdMs = new Date(createdAtIso).getTime();
+        if (Number.isNaN(createdMs)) return fallbackMinutes || 1;
+        const diffMin = Math.floor((Date.now() - createdMs) / 60000);
+        return Math.max(1, diffMin);
+      }
+
+      function formatBurnTime(minutes) {
+        if (minutes <= 1) return '🕯️ горит только что';
+        if (minutes >= 60) {
+          const hours = Math.floor(minutes / 60);
+          return hours === 1 ? '🕯️ горит 1 час' : '🕯️ горит ' + hours + ' ч.';
+        }
+        const lastDigit = minutes % 10;
+        const lastTwo = minutes % 100;
+        let word = 'минут';
+        if (lastTwo < 11 || lastTwo > 14) {
+          if (lastDigit === 1) word = 'минуту';
+          else if (lastDigit >= 2 && lastDigit <= 4) word = 'минуты';
+        }
+        return '🕯️ горит ' + minutes + ' ' + word;
+      }
+
+      function mapDbRowToCard(row, index, isMineOrLive) {
+        const rawName = typeof row.name === 'string' ? row.name.trim() : '';
+        const cleanName = rawName || 'анонимный разработчик';
+        const cleanMessage = typeof row.message === 'string' ? row.message : '';
+        const minutesAgo = calcMinutesAgo(row.created_at, 1);
+        const numericSeed = typeof row.id === 'number' ? row.id : index;
+
+        const variants = ['variant-yellow', '', 'variant-blue', 'variant-pink'];
+        const chosenVariant = isMineOrLive === 'mine'
+          ? 'variant-mine'
+          : variants[Math.abs(numericSeed) % variants.length];
+
+        let badge = '🔥 ГОРЯЧЕЕ';
+        let badgeClass = '';
+        if (isMineOrLive === 'mine') {
+          badge = 'ТВОЯ СВЕЧА!!!';
+          badgeClass = 'badge-new';
+        } else if (isMineOrLive === 'live' || minutesAgo <= 10) {
+          badge = 'НОВОЕ!!!';
+          badgeClass = 'badge-new';
+        } else if (Math.abs(numericSeed) % 3 === 0) {
+          badge = '🙏 МОЛЬБА';
+          badgeClass = 'badge-pain';
+        } else if (Math.abs(numericSeed) % 4 === 0) {
+          badge = '★ КЛАССИКА';
+          badgeClass = 'badge-classic';
+        }
+
+        const category = minutesAgo <= 30 ? 'fresh' : 'hot';
+        const initialLikes = 1 + (Math.abs(numericSeed * 7) % 45);
+
+        return {
+          id: row.id !== undefined && row.id !== null ? String(row.id) : 'row-' + Date.now() + '-' + index,
+          name: cleanName,
+          message: cleanMessage,
+          created_at: row.created_at || null,
+          minutesAgo: minutesAgo,
+          badge: badge,
+          badgeClass: badgeClass,
+          variant: chosenVariant,
+          category: category,
+          likes: isMineOrLive ? 1 : initialLikes
+        };
+      }
+
+      function renderLoadingPrayers() {
+        if (!prayersGridEl) return;
+        prayersGridEl.textContent = '';
+
+        const loadingCard = document.createElement('article');
+        loadingCard.className = 'prayer-card variant-yellow';
+
+        const badgeEl = document.createElement('div');
+        badgeEl.className = 'prayer-badge badge-classic';
+        badgeEl.textContent = 'ЗАГРУЗКА...';
+        loadingCard.appendChild(badgeEl);
+
+        const topWrap = document.createElement('div');
+        const header = document.createElement('div');
+        header.className = 'prayer-header';
+
+        const author = document.createElement('span');
+        author.className = 'prayer-author';
+        author.textContent = 'система_алтаря';
+
+        const candleIcon = document.createElement('span');
+        candleIcon.className = 'mini-flame-dot';
+        candleIcon.textContent = '🕯️';
+
+        header.appendChild(author);
+        header.appendChild(candleIcon);
+
+        const msg = document.createElement('p');
+        msg.className = 'prayer-message';
+        msg.style.marginTop = '10px';
+        msg.textContent = 'ЗАГРУЗКА МОЛЬБ ИЗ БАЗЫ ДАРИО...';
+
+        topWrap.appendChild(header);
+        topWrap.appendChild(msg);
+        loadingCard.appendChild(topWrap);
+
+        prayersGridEl.appendChild(loadingCard);
+      }
+
+      function renderPrayers() {
+        if (!prayersGridEl) return;
+        prayersGridEl.textContent = '';
+
+        let filtered = prayersList.filter(function (item) {
+          if (currentFilter === 'all') return true;
+          return item.category === currentFilter;
+        });
+
+        if (filtered.length === 0 && prayersList.length > 0) {
+          filtered = prayersList;
+        }
+
+        filtered.forEach(function (item) {
+          const card = document.createElement('article');
+          card.className = 'prayer-card ' + (item.variant || '');
+
+          if (item.badge) {
+            const badgeEl = document.createElement('div');
+            badgeEl.className = 'prayer-badge ' + (item.badgeClass || '');
+            badgeEl.textContent = item.badge;
+            card.appendChild(badgeEl);
+          }
+
+          const topWrap = document.createElement('div');
+
+          const header = document.createElement('div');
+          header.className = 'prayer-header';
+
+          const author = document.createElement('span');
+          author.className = 'prayer-author';
+          const safeAuthor = item.name && String(item.name).trim()
+            ? String(item.name).trim()
+            : 'анонимный разработчик';
+          author.textContent = safeAuthor;
+
+          const candleIcon = document.createElement('span');
+          candleIcon.className = 'mini-flame-dot';
+          candleIcon.textContent = '🕯️';
+
+          header.appendChild(author);
+          header.appendChild(candleIcon);
+
+          const msg = document.createElement('p');
+          msg.className = 'prayer-message';
+          msg.style.marginTop = '10px';
+          msg.textContent = item.message ? String(item.message) : '';
+
+          topWrap.appendChild(header);
+          topWrap.appendChild(msg);
+
+          const footer = document.createElement('div');
+          footer.className = 'prayer-footer';
+
+          const timeSpan = document.createElement('span');
+          timeSpan.className = 'prayer-time';
+          const mins = item.created_at
+            ? calcMinutesAgo(item.created_at, item.minutesAgo || 1)
+            : (item.minutesAgo || 1);
+          timeSpan.textContent = formatBurnTime(mins);
+
+          const amenBtn = document.createElement('button');
+          amenBtn.type = 'button';
+          amenBtn.className = 'btn-amen';
+          let currentLikes = item.likes || 1;
+          amenBtn.textContent = '🙏 Жиза (' + currentLikes + ')';
+
+          amenBtn.addEventListener('click', function () {
+            if (!amenBtn.classList.contains('voted')) {
+              currentLikes += 1;
+              item.likes = currentLikes;
+              amenBtn.classList.add('voted');
+              amenBtn.textContent = '🙏 Жиза (' + currentLikes + ')';
+              spawnCandleParticle('🙏');
+              retriggerClass(card, 'amen-flash', 480);
+              spawnButtonBurst(amenBtn, '+1 ЖИЗА');
+            } else {
+              showToast('Вы уже духовно поддержали эту мольбу!');
+            }
+          });
+
+          footer.appendChild(timeSpan);
+          footer.appendChild(amenBtn);
+
+          card.appendChild(topWrap);
+          card.appendChild(footer);
+
+          prayersGridEl.appendChild(card);
+        });
+      }
+
+      async function fetchExactCandlesCount() {
+        if (!supabase) return null;
+        const { count, error } = await supabase
+          .from('candles')
+          .select('*', { count: 'exact', head: true });
+
+        if (error) {
+          throw error;
+        }
+        return typeof count === 'number' ? count : 0;
+      }
+
+      async function loadCandlesData() {
+        setCounterLoadingState();
+        renderLoadingPrayers();
+
+        if (!supabase) {
+          console.error(new Error('Supabase клиент не инициализирован: укажите корректный SUPABASE_URL.'));
+          showToast('⚠️ Связь с Дарио временно потеряна. Попробуйте поставить свечу ещё раз.');
+          usingFallbackDemo = true;
+          prayersList = DEMO_PRAYERS.slice();
+          updateCandleCounterDisplay(DEMO_PRAYERS.length, false);
+          renderPrayers();
+          return;
+        }
+
+        try {
+          const countPromise = supabase
+            .from('candles')
+            .select('*', { count: 'exact', head: true });
+
+          const listPromise = supabase
+            .from('candles')
+            .select('id,name,message,created_at')
+            .order('created_at', { ascending: false })
+            .limit(50);
+
+          const results = await Promise.all([countPromise, listPromise]);
+          const countRes = results[0];
+          const listRes = results[1];
+
+          if (countRes.error) {
+            throw countRes.error;
+          }
+          if (listRes.error) {
+            throw listRes.error;
+          }
+
+          const rows = Array.isArray(listRes.data) ? listRes.data : [];
+          const exactCount = typeof countRes.count === 'number' ? countRes.count : rows.length;
+
+          updateCandleCounterDisplay(exactCount, false);
+
+          if (rows.length > 0) {
+            usingFallbackDemo = false;
+            prayersList = rows.map(function (row, idx) {
+              if (row.id !== undefined && row.id !== null) {
+                knownCandleIds.add(String(row.id));
+              }
+              return mapDbRowToCard(row, idx, false);
+            });
+          } else {
+            usingFallbackDemo = true;
+            prayersList = DEMO_PRAYERS.slice();
+          }
+
+          renderPrayers();
+        } catch (error) {
+          console.error(error);
+          showToast('⚠️ Связь с Дарио временно потеряна. Попробуйте поставить свечу ещё раз.');
+          usingFallbackDemo = true;
+          prayersList = DEMO_PRAYERS.slice();
+          updateCandleCounterDisplay(DEMO_PRAYERS.length, false);
+          renderPrayers();
+        }
+      }
+
+      function initRealtimeSubscription() {
+        if (!supabase || typeof supabase.channel !== 'function') return;
+
+        try {
+          supabase
+            .channel('candles-live')
+            .on(
+              'postgres_changes',
+              {
+                event: 'INSERT',
+                schema: 'public',
+                table: 'candles'
+              },
+              function (payload) {
+                if (!payload || !payload.new) return;
+                const newRow = payload.new;
+                const rowIdStr = newRow.id !== undefined && newRow.id !== null ? String(newRow.id) : null;
+
+                if (rowIdStr && knownCandleIds.has(rowIdStr)) {
+                  return;
+                }
+                if (rowIdStr) {
+                  knownCandleIds.add(rowIdStr);
+                }
+
+                const newCard = mapDbRowToCard(newRow, 0, 'live');
+                if (usingFallbackDemo) {
+                  prayersList = [];
+                  usingFallbackDemo = false;
+                }
+
+                prayersList.unshift(newCard);
+                if (prayersList.length > 50) {
+                  prayersList.length = 50;
+                }
+
+                const nextCount = (typeof currentCount === 'number' ? currentCount : 0) + 1;
+                updateCandleCounterDisplay(nextCount, true);
+                boostCandleFlame('🕯️ +1 СВЕЧА');
+                renderPrayers();
+              }
+            )
+            .subscribe();
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      function openRitualModal() {
+        if (!modalBackdrop) return;
+        modalBackdrop.classList.add('open');
+        step1El.classList.add('active');
+        step2El.classList.remove('active');
+        step3El.classList.remove('active');
+        formErrorMsg.style.display = 'none';
+
+        let progress = 0;
+        progressBarEl.style.width = '0%';
+        percentTextEl.textContent = '0%';
+        asciiBarEl.textContent = '[░░░░░░░░░░]';
+        statusLogEl.textContent = '> ' + RITUAL_STEPS_TEXT[0];
+
+        if (ritualInterval) clearInterval(ritualInterval);
+
+        ritualInterval = setInterval(function () {
+          progress += Math.floor(Math.random() * 18) + 12;
+          if (progress >= 100) {
+            progress = 100;
+            clearInterval(ritualInterval);
+            updateProgressUI(100);
+            setTimeout(function () {
+              step1El.classList.remove('active');
+              step2El.classList.add('active');
+              boostCandleFlame('🕯️ ФИТИЛЬ ЗАЖЖЁН');
+              if (messageInput) messageInput.focus();
+            }, 350);
+          } else {
+            updateProgressUI(progress);
+          }
+        }, 220);
+      }
+
+      function updateProgressUI(pct) {
+        progressBarEl.style.width = pct + '%';
+        percentTextEl.textContent = pct + '%';
+        const filledBlocks = Math.round(pct / 10);
+        const barStr = '█'.repeat(filledBlocks) + '░'.repeat(10 - filledBlocks);
+        asciiBarEl.textContent = '[' + barStr + ']';
+        const stepIdx = Math.min(
+          RITUAL_STEPS_TEXT.length - 1,
+          Math.floor((pct / 100) * RITUAL_STEPS_TEXT.length)
+        );
+        statusLogEl.textContent = '> ' + RITUAL_STEPS_TEXT[stepIdx];
+      }
+
+      function closeRitualModal() {
+        if (ritualInterval) clearInterval(ritualInterval);
+        modalBackdrop.classList.remove('open');
+      }
+
+      async function handlePrayerSubmit(e) {
+        e.preventDefault();
+        if (isSubmittingPrayer) return;
+
+        const name = (nameInput.value || '').trim().slice(0, 40);
+        const message = (messageInput.value || '').trim().slice(0, 200);
+
+        if (!message) {
+          formErrorMsg.style.display = 'block';
+          messageInput.focus();
+          return;
+        }
+        formErrorMsg.style.display = 'none';
+
+        if (!supabase) {
+          console.error(new Error('Supabase недоступен: проверьте SUPABASE_URL.'));
+          showToast('⚠️ Связь с Дарио временно потеряна. Попробуйте поставить свечу ещё раз.');
+          return;
+        }
+
+        isSubmittingPrayer = true;
+        const originalBtnText = submitPrayerBtn.textContent;
+        submitPrayerBtn.disabled = true;
+        submitPrayerBtn.textContent = '⏳ ОТПРАВЛЯЕМ МОЛЬБУ ДАРИО...';
+
+        try {
+          let insertRes = await supabase
+            .from('candles')
+            .insert({
+              name: name || null,
+              message: message
+            })
+            .select()
+            .single();
+
+          if (insertRes.error && !name) {
+            insertRes = await supabase
+              .from('candles')
+              .insert({
+                name: 'анонимный разработчик',
+                message: message
+              })
+              .select()
+              .single();
+          }
+
+          if (insertRes.error) {
+            throw insertRes.error;
+          }
+
+          const insertedRow = insertRes.data || {
+            id: Date.now(),
+            name: name || 'анонимный разработчик',
+            message: message,
+            created_at: new Date().toISOString()
+          };
+
+          if (insertedRow.id !== undefined && insertedRow.id !== null) {
+            knownCandleIds.add(String(insertedRow.id));
+          }
+
+          const createdCard = mapDbRowToCard(insertedRow, 0, 'mine');
+
+          if (usingFallbackDemo) {
+            prayersList = [];
+            usingFallbackDemo = false;
+          }
+
+          prayersList.unshift(createdCard);
+          if (prayersList.length > 50) {
+            prayersList.length = 50;
+          }
+
+          const optimisticCount = (typeof currentCount === 'number' ? currentCount : 0) + 1;
+          updateCandleCounterDisplay(optimisticCount, true);
+
+          try {
+            const exactTotal = await fetchExactCandlesCount();
+            if (typeof exactTotal === 'number') {
+              updateCandleCounterDisplay(exactTotal, false);
+            }
+          } catch (countErr) {
+            console.error(countErr);
+          }
+
+          boostCandleFlame('🕯️ +1 СВЕЧА');
+
+          currentFilter = 'all';
+          document.querySelectorAll('.filter-btn').forEach(function (btn) {
+            btn.classList.toggle('active', btn.getAttribute('data-filter') === 'all');
+          });
+          renderPrayers();
+
+          const ticketId = insertedRow.id ? padNumber(insertedRow.id, 6) : padNumber(currentCount || 1, 6);
+          receiptNumberEl.textContent = 'АМОДЕЙ-' + ticketId;
+
+          nameInput.value = '';
+          messageInput.value = '';
+          charCounterEl.textContent = '0 / 200';
+          charCounterEl.classList.remove('limit-near');
+
+          step2El.classList.remove('active');
+          step3El.classList.add('active');
+        } catch (error) {
+          console.error(error);
+          showToast('⚠️ Связь с Дарио временно потеряна. Попробуйте поставить свечу ещё раз.');
+        } finally {
+          isSubmittingPrayer = false;
+          submitPrayerBtn.disabled = false;
+          submitPrayerBtn.textContent = originalBtnText;
+        }
+      }
+
+      function initMidnightCountdown() {
+        const countdownEl = document.getElementById('midnightCountdown');
+        const subtextEl = document.getElementById('midnightSubtext');
+
+        function tick() {
+          const now = new Date();
+          const hours = now.getHours();
+          const mins = now.getMinutes();
+
+          if (hours === 0 && mins < 5) {
+            if (countdownEl) countdownEl.textContent = 'МОМЕНТ ИСТИНЫ НАСТУПИЛ';
+            if (subtextEl) subtextEl.textContent = 'проверь лимиты прямо сейчас';
+            return;
+          }
+
+          const midnight = new Date(now);
+          midnight.setHours(24, 0, 0, 0);
+          const diffSec = Math.max(0, Math.floor((midnight - now) / 1000));
+          const h = Math.floor(diffSec / 3600);
+          const m = Math.floor((diffSec % 3600) / 60);
+          const s = diffSec % 60;
+
+          if (countdownEl) {
+            countdownEl.textContent = padNumber(h, 2) + ':' + padNumber(m, 2) + ':' + padNumber(s, 2);
+          }
+        }
+
+        tick();
+        setInterval(tick, 1000);
+      }
+
+      function initRotatingPlaceholders() {
+        let idx = 0;
+        setInterval(function () {
+          idx = (idx + 1) % PLACEHOLDERS.length;
+          if (messageInput && document.activeElement !== messageInput) {
+            messageInput.setAttribute('placeholder', PLACEHOLDERS[idx]);
+          }
+        }, 3200);
+      }
+
+      function initDarioBotChat() {
+        const chatWidget = document.getElementById('chatWidget');
+        const chatHeaderToggle = document.getElementById('chatHeaderToggle');
+        const chatToggleIcon = document.getElementById('chatToggleIcon');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatForm = document.getElementById('chatForm');
+        const chatInput = document.getElementById('chatInput');
+
+        function toggleChat() {
+          const isMin = chatWidget.classList.toggle('minimized');
+          chatHeaderToggle.setAttribute('aria-expanded', String(!isMin));
+          chatToggleIcon.textContent = isMin ? '[▲]' : '[—]';
+          if (!isMin && chatInput) {
+            chatInput.focus();
+          }
+        }
+
+        chatHeaderToggle.addEventListener('click', toggleChat);
+        chatHeaderToggle.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleChat();
+          }
+        });
+
+        chatForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const text = (chatInput.value || '').trim();
+          if (!text) return;
+
+          const userBubble = document.createElement('div');
+          userBubble.className = 'chat-msg user';
+          userBubble.textContent = text;
+          chatMessages.appendChild(userBubble);
+          chatInput.value = '';
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+
+          setTimeout(function () {
+            const botBubble = document.createElement('div');
+            botBubble.className = 'chat-msg bot';
+            botBubble.textContent = BOT_REPLIES[Math.floor(Math.random() * BOT_REPLIES.length)];
+            chatMessages.appendChild(botBubble);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+          }, 420);
+        });
+      }
+
+      function bindInteractions() {
+        document.getElementById('heroOpenRitualBtn').addEventListener('click', openRitualModal);
+        document.getElementById('navCandleBtn').addEventListener('click', openRitualModal);
+        document.getElementById('closeModalBtn').addEventListener('click', closeRitualModal);
+
+        modalBackdrop.addEventListener('click', function (e) {
+          if (e.target === modalBackdrop) closeRitualModal();
+        });
+
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && modalBackdrop.classList.contains('open')) {
+            closeRitualModal();
+          }
+        });
+
+        document.getElementById('viewCandleBtn').addEventListener('click', function () {
+          closeRitualModal();
+          const section = document.getElementById('prayersSection');
+          if (section) section.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        messageInput.addEventListener('input', function () {
+          const len = messageInput.value.length;
+          charCounterEl.textContent = len + ' / 200';
+          charCounterEl.classList.toggle('limit-near', len >= 175);
+        });
+
+        document.querySelectorAll('.btn-excuse-chip').forEach(function (chip) {
+          chip.addEventListener('click', function () {
+            const val = chip.getAttribute('data-text') || '';
+            messageInput.value = val;
+            charCounterEl.textContent = val.length + ' / 200';
+            messageInput.focus();
+          });
+        });
+
+        prayerForm.addEventListener('submit', handlePrayerSubmit);
+
+        const dontPressBtn = document.getElementById('dontPressBtn');
+        let dontPressCount = 0;
+        dontPressBtn.addEventListener('click', function () {
+          dontPressCount += 1;
+          if (dontPressCount === 1) {
+            dontPressBtn.textContent = 'я же просил';
+            showToast('Я же просил не нажимать. Теперь Дарио отложил сброс ещё на 5 минут.');
+          } else if (dontPressCount === 2) {
+            dontPressBtn.textContent = 'опять нажал';
+            showToast('Хватит нажимать, лучше поставь свечу!');
+          } else {
+            dontPressBtn.textContent = '429 УСПОКОЙСЯ';
+            showToast('Ошибка 429: превышен лимит нажатий на кнопку «НЕ НАЖИМАТЬ».');
+          }
+        });
+
+        interactiveCandleEl.addEventListener('click', function () {
+          boostCandleFlame('✨ +1 К ВЕРЕ');
+          showToast('Пламя вспыхнуло ярче! Дарио почувствовал лёгкое тепло в Калифорнии.');
+        });
+
+        interactiveCandleEl.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            boostCandleFlame('✨ +1 К ВЕРЕ');
+          }
+        });
+
+        document.getElementById('btnSpark').addEventListener('click', function () {
+          boostCandleFlame('ТОКЕН');
+          showToast('Вы подбросили последний токен в огонь. Красиво горит!');
+        });
+
+        document.getElementById('btnBlow').addEventListener('click', function () {
+          retriggerClass(candleStageEl, 'wind-blow', 680);
+          spawnCandleParticle('ФЬЮЮХ');
+          spawnCandleParticle('💨');
+          showToast('НЕ ДУЙТЕ НА СВЕЧУ! Вы чуть не сбили духовное соединение с сервером!');
+        });
+
+        document.getElementById('btnPrayQuick').addEventListener('click', function () {
+          boostCandleFlame('🙏 ПРОДОЛЖАЙ');
+          showToast('Шёпот «продолжай без ошибок» отправлен в ночное небо.');
+        });
+
+        document.getElementById('xpCloseBtn').addEventListener('click', function () {
+          retriggerClass(altarWindowEl, 'window-shake', 420);
+          showToast('Нельзя закрыть свечу, пока код не задеплоен!');
+        });
+
+        document.getElementById('xpMinimizeBtn').addEventListener('click', function () {
+          retriggerClass(altarWindowEl, 'window-minimize-fake', 520);
+          showToast('Надежду свернуть нельзя.');
+        });
+
+        document.getElementById('xpMaxBtn').addEventListener('click', function () {
+          retriggerClass(altarWindowEl, 'window-max-fake', 520);
+          boostCandleFlame('🕯️ МАКСИМУМ');
+          showToast('Свеча уже развёрнута на всю мощь вашей видеокарты.');
+        });
+
+        document.getElementById('pingDarioBtn').addEventListener('click', function () {
+          boostCandleFlame('🔔 ДЗЫНЬ');
+          showToast('ТУК-ТУК-ТУК! Звук по трубе ушёл в сторону Сан-Франциско.');
+        });
+
+        document.getElementById('checkLimitsBtn').addEventListener('click', function () {
+          retriggerClass(mainCounterWrapEl, 'counter-glitch', 600);
+          spawnCandleParticle('429?');
+          showToast('ну что? (Спойлер: если ещё не смотрели — проверьте терминал)');
+        });
+
+        document.getElementById('fakeAdBtn').addEventListener('click', function () {
+          retriggerClass(fakeAdBannerEl, 'ad-wobble', 500);
+          showToast('Никакого секрета с содой нет. Только свеча и смирение.');
+        });
+
+        document.querySelectorAll('.filter-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            document.querySelectorAll('.filter-btn').forEach(function (b) {
+              b.classList.remove('active');
+            });
+            btn.classList.add('active');
+            currentFilter = btn.getAttribute('data-filter') || 'all';
+            renderPrayers();
+            retriggerClass(prayersGridEl, 'grid-swap', 340);
+          });
+        });
+
+        document.querySelectorAll('.btn-sacrifice').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            const msg = btn.getAttribute('data-sacrifice');
+            retriggerClass(btn, 'sacrifice-pop', 460);
+            boostCandleFlame('💸 ЖЕРТВА ПРИНЯТА');
+            showToast(msg || 'Жертва принята!');
+          });
+        });
+
+        document.querySelectorAll('.footer-link-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            showToast(btn.getAttribute('data-footer-msg') || '');
+          });
+        });
+
+        document.addEventListener('click', function (e) {
+          const button = e.target.closest('button');
+          if (!button || button.classList.contains('btn-amen')) return;
+          spawnButtonBurst(button);
+        });
+      }
+
+      function startAmbientEffects() {
+        setInterval(function () {
+          if (document.visibilityState === 'visible') {
+            spawnCandleParticle();
+          }
+        }, 2200);
+
+        setInterval(function () {
+          if (document.visibilityState === 'visible' && !usingFallbackDemo && prayersList.length > 0) {
+            renderPrayers();
+          }
+        }, 60000);
+      }
+
+      initVisitorCounter();
+      loadCandlesData();
+      initRealtimeSubscription();
+      initMidnightCountdown();
+      initRotatingPlaceholders();
+      initDarioBotChat();
+      bindInteractions();
+      startAmbientEffects();
+    })();
+  </script>
+</body>
+</html>
